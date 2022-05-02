@@ -5,15 +5,15 @@ module.exports = {
   entry: path.resolve(__dirname, 'src', 'index.js'),
   mode: 'development',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'public'),
     filename: 'bundle.js'
   },
   devServer: {
     static: {
-      directory: path.join(__dirname, 'dist'),
+      directory: path.join(__dirname, 'public'),
     },
     compress: true,
-    port: 9000
+    port: 3000
   },
   module: {
     rules: [
