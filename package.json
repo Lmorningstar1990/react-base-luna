@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "nodemon app.js",
     "build": "npx webpack-cli build",
     "test": "npx webpack serve"
   },

@@ -1,23 +1,26 @@
 const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
-
-
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
-const booksRouter = require('./routes/books');
 
 const app = express();
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use((req, res, next) => {
+    let body='';
+    req.on('end', () => {
+        const userName = body.split('=')[1];
+        if(userName){
+            req.body = { name: userName};
+        }
+        next();
+    });
+    req.on('data', chunk =>{
+        body += chunk;
+    });
+});
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/books', booksRouter);
+app.use((req, res, next) => {
+    if(req.body) {
+        return res.send('<h1>' + req.body.name + '</h1>');
+    }
+    res.send('<form method="POST"><input type="text" name="username"><button>Create User</button>')
+});
 
-module.exports = app;
+app.listen(9000);

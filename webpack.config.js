@@ -8,6 +8,12 @@ module.exports = {
     path: path.resolve(__dirname, 'public'),
     filename: 'bundle.js'
   },
+    entry: path.resolve(__dirname, 'src', 'books.js'),
+    mode: 'development',
+    output: {
+      path: path.resolve(__dirname, 'public'),
+      filename: 'books.js'
+    },
   devServer: {
     static: {
       directory: path.join(__dirname, 'public'),
